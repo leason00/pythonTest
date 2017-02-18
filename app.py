@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import json
 import sys
-from flask import Flask ,make_response
+from flask import Flask,make_response
 from flask import request
 from base import *
 from flask import redirect
@@ -25,7 +25,7 @@ def index(fun):
 
 @app.route('/user/<name>')
 def user(name):
-    return'<h1>hello这是个中文, %s</h1>' % name
+    return'<h1>欢迎, %s</h1>' % name
 
 if __name__ =='__main__':
     app.run(debug=True)

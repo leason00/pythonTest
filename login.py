@@ -5,7 +5,6 @@ import json
 import sys
 from flask import request
 from cgibase import cgibase
-from sqlbase import *
 
 class Clogin(cgibase):
     def __init__(self):
@@ -21,8 +20,8 @@ class Clogin(cgibase):
             data = self.get_input()["data"]
             user_name = data["user"]
             user_psw = data["psw"]
-            user = session.query(User).filter(User.name == user_name).one()
-            if user_psw != user.psw:
+            userPsw = '123456'
+            if user_psw != userPsw:
                 self.out = '{"status":1, "msg":"密码错误！"}'
             else:
                 self.out = '{"status":0, "msg":"登录成功！"}'
@@ -32,11 +31,11 @@ class Clogin(cgibase):
     def logout(self):
         try:
             userinfo = []
-            for user in session.query(User):  # 遍历时查询
-                idinfo = {"id":str(user.id),"name":str(user.name),"psw":str(user.psw)}
-                userinfo.append(idinfo)
-            utext = json.dumps(userinfo)
-            self.out = '{"status":0, "data":'+ utext +'}'
+            # for user in session.query(User):  # 遍历时查询
+            #     idinfo = {"id":str(user.id),"name":str(user.name),"psw":str(user.psw)}
+            #     userinfo.append(idinfo)
+            # utext = json.dumps(userinfo)
+            self.out = '{"status":0, "data":"注销成功"}'
         except Exception, e:
             self.out = '{"status":1, "msg":"'+str(e)+'"}'
 
