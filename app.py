@@ -1,12 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import json
 import sys
 from flask import Flask,make_response
 from flask import request
 from base import *
-from flask import redirect
-from flask import jsonify
 app = Flask(__name__)
 reload(sys)
 sys.setdefaultencoding('utf8')
