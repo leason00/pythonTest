@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import sys
-from flask import Flask,make_response
+from flask import Flask, make_response
 from flask import request
+from config import cfg
 from base import *
 app = Flask(__name__)
 reload(sys)
@@ -15,10 +16,13 @@ def index(fun):
             c = vpn_index_dict[fun]
             c.onInit()
             out = c.output()
-            resp = make_response(out)
+            print out
+            resp = c.make_resp(out)
             return resp
         else:
             return '<h1>只接受post请求！</h1>'
+    else:
+        return make_response(cfg.err['refused'])
 
 @app.route('/user/<name>')
 def user(name):

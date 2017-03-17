@@ -1,9 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import json
-import sys
-from flask import request
 from cgibase import cgibase
 from app_opr.base_opr import basic_opr as db
 
@@ -12,13 +9,21 @@ class Clogin(cgibase):
         return cgibase.__init__(self)
 
     def onInit(self):
-        self.out = {}
-        opr = self.get_input()["opr"]
-        eval("self.%s()" % opr)
+        self.no_check_cookie()  #设置不检查cookies
+        if cgibase.pre_do(self):
+            opr = self.get_input()
+            if opr is None:
+                return
+            else:
+                eval("self.%s()" % opr)
+        else:
+            return
+        self.set_cookies()      #设置cookies
+
 
     def login(self):
         try:
-            data = self.get_input()["data"]
+            data = self.input["data"]
             user_name = data["user_name"]
             user_psw = data["user_psw"]
             user_info = db().login(user_name)
