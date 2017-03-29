@@ -9,14 +9,6 @@ class basic_opr():
 
     def login(self, user_name):
         userInfo = self.db['test'].find_one({'_id': user_name})
-        # records = [data for data in userInfo]
-        # print records
-        # data = {
-        #     "_id" : "leason",
-        #     "user_name" : "leason",
-        #     "password" : "123456"
-        # }
-        # self.db['test'].insert_one(data)
         return userInfo
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ class Clogin(cgibase):
         return cgibase.__init__(self)
 
     def onInit(self):
-        self.no_check_cookie()  #设置不检查cookies
+        # self.no_check_cookie()  #设置不检查cookies
         if cgibase.pre_do(self):
             opr = self.get_input()
             if opr is None:
@@ -31,6 +31,7 @@ class Clogin(cgibase):
             if user_psw != userPsw:
                 self.out = '{"status":1, "msg":"密码错误！"}'
             else:
+                self.login_sate = True
                 self.out = '{"status":0, "msg":"登录成功！"}'
         except Exception, e:
             self.out = '{"status":1, "msg":"用户名或者密码错误！"}'

@@ -38,6 +38,7 @@ class cgibase:
     def myinit(self):
         self.out = {}
         self.input = {}
+        self.login_sate = False
         self.__setCookieFlag = False
         self.__checkCookieFlag = True
 
@@ -50,8 +51,10 @@ class cgibase:
 
     def make_resp(self, data):
         resp = make_response(data)
+        print self.login_sate
         if self.__setCookieFlag:
-            resp.set_cookie(cfg.cookies_name, randomStr())
+            if self.login_sate:
+                resp.set_cookie(cfg.cookies_name, randomStr())
         return resp
 
     def set_cookies(self):
